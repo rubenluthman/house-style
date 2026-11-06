@@ -1,0 +1,11 @@
+extends: existence
+message: "'%s' is filler. State the fact directly; padding delays the point the sentence is there to make."
+level: error
+ignorecase: true
+scope: text
+tokens:
+  - delve
+  - testament to
+  - rich tapestry
+  - beacon of
+  - nestled

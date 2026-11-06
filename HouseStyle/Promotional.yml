@@ -1,12 +1,9 @@
 extends: existence
-message: "'%s' is promotional or generic AI phrasing. Name the concrete property or behavior instead; claims of quality without evidence do not belong in project documentation."
+message: "'%s' is promotional or generic phrasing. Name the concrete property or behavior instead; claims of quality without evidence do not belong in project documentation."
 level: error
 ignorecase: true
 scope: text
 tokens:
-  - delve
-  - testament to
-  - rich tapestry
   - seamless
   - seamlessly
   - cutting-edge
@@ -18,8 +15,6 @@ tokens:
   - groundbreaking
   - unleash
   - unleashing
-  - beacon of
-  - nestled
   - world-class
   - state-of-the-art
   - blazing

@@ -20,10 +20,16 @@ has() { echo "$1" | jq -e --arg w "$2" '[.[][] | select(.Check=="HouseStyle.Prom
 
 echo "1. should-alert.md raises every expected check..."
 out="$(run tests/should-alert.md)"
-for want in delve seamless cutting-edge game-changer revolutionize revolutionise; do
+for want in seamless cutting-edge game-changer revolutionize revolutionise; do
   has "$out" "$want" || fail "expected Promotional alert for '$want'"
 done
 [ "$(count "$out" HouseStyle.Dashes)" = "2" ] || fail "expected two Dashes alerts (prose and code span)"
+
+echo "1b. Filler tokens raise HouseStyle.Filler..."
+for want in "delve" "testament to" "rich tapestry" "beacon of" "nestled"; do
+  echo "$out" | jq -e --arg w "$want" '[.[][] | select(.Check=="HouseStyle.Filler" and (.Match|ascii_downcase)==$w)] | length >= 1' >/dev/null \
+    || fail "expected Filler alert for '$want'"
+done
 
 echo "2. should-pass.md raises no alerts..."
 out="$(run tests/should-pass.md)"
