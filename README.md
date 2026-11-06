@@ -25,7 +25,7 @@ Packages = https://github.com/rubenluthman/house-style/releases/download/v0.2.0/
 BasedOnStyles = HouseStyle
 ```
 
-Add `.vale/styles/HouseStyle` to `.gitignore`; `vale sync` restores it. Run `vale --output=JSON .` or plain `vale .` in `verify_commit.sh`. Add local rules only for file types this package does not cover. List `vale` as a verification dependency in the repository's `AGENTS.md`.
+Add `.vale/styles/HouseStyle` to `.gitignore`; `vale sync` restores it. Run `vale sync` again whenever the pinned release changes, not only when the style folder is missing; otherwise a version bump keeps running the old cached rules. The pattern: compare the `Packages` line in `.vale.ini` with a `.pin` stamp that `verify_commit.sh` writes inside `.vale/styles/HouseStyle/` after each successful sync, and resync when they differ. Run `vale --output=JSON .` or plain `vale .` in `verify_commit.sh`. Add local rules only for file types this package does not cover. List `vale` as a verification dependency in the repository's `AGENTS.md`.
 
 ## House style paragraph
 
