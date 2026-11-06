@@ -1,0 +1,7 @@
+extends: existence
+message: "Use a spaced en dash ( – ) instead of an em dash. House typography follows Swedish and British usage, where a spaced en dash marks a parenthetical break."
+level: error
+nonword: true
+scope: text
+tokens:
+  - "\u2014"
