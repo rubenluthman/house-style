@@ -1,7 +1,7 @@
 extends: existence
-message: "Use a spaced en dash ( – ) instead of an em dash. House typography follows Swedish and British usage, where a spaced en dash marks a parenthetical break."
+message: "Use a spaced en dash ( – ) instead of an em dash, including in code, strings and comments (write the escape \\u{2014} in Swift when the character itself is needed). House typography follows Swedish and British usage, where a spaced en dash marks a parenthetical break."
 level: error
 nonword: true
-scope: text
+scope: raw
 tokens:
   - "\u2014"

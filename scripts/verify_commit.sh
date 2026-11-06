@@ -10,26 +10,35 @@ fail() { echo "FAIL: $*"; exit 1; }
 work="$(mktemp -d)"; trap 'rm -rf "$work"' EXIT
 cp -R HouseStyle .vale.ini "$work/"
 mkdir "$work/tests"
-for f in tests/*.md; do
+for f in tests/*.md tests/*.swift; do
   sed $'s/@@EMDASH@@/\xe2\x80\x94/g' "$f" > "$work/$f"
 done
 
 run() { (cd "$work" && vale --output=JSON "$1" || true); }
+count() { echo "$1" | jq --arg c "$2" '[.[][] | select(.Check==$c)] | length'; }
+has() { echo "$1" | jq -e --arg w "$2" '[.[][] | select(.Check=="HouseStyle.Promotional" and (.Match|ascii_downcase)==$w)] | length >= 1' >/dev/null; }
 
 echo "1. should-alert.md raises every expected check..."
 out="$(run tests/should-alert.md)"
-for want in "delve" "seamless" "cutting-edge" "game-changer" "revolutionize" "revolutionise"; do
-  echo "$out" | jq -e --arg w "$want" '[.[][] | select(.Check=="HouseStyle.Promotional" and (.Match|ascii_downcase)==$w)] | length >= 1' >/dev/null \
-    || fail "expected Promotional alert for '$want'"
+for want in delve seamless cutting-edge game-changer revolutionize revolutionise; do
+  has "$out" "$want" || fail "expected Promotional alert for '$want'"
 done
-echo "$out" | jq -e '[.[][] | select(.Check=="HouseStyle.Dashes")] | length == 1' >/dev/null \
-  || fail "expected exactly one Dashes alert"
+[ "$(count "$out" HouseStyle.Dashes)" = "2" ] || fail "expected two Dashes alerts (prose and code span)"
 
 echo "2. should-pass.md raises no alerts..."
 out="$(run tests/should-pass.md)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"
 
-echo "3. no em dashes or inline word lists outside HouseStyle/..."
+echo "3. should-alert.swift flags the dash in a string and in a comment, promo only in comments..."
+out="$(run tests/should-alert.swift)"
+[ "$(count "$out" HouseStyle.Dashes)" = "2" ] || fail "expected two Dashes alerts in Swift (string and comment)"
+has "$out" seamless || fail "expected Promotional alert for 'seamless' in a comment"
+
+echo "4. should-pass.swift raises no alerts..."
+out="$(run tests/should-pass.swift)"
+[ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"
+
+echo "5. no em dashes in the repository..."
 if git ls-files -z --cached --others --exclude-standard | xargs -0 grep -l $'\xe2\x80\x94' 2>/dev/null; then
   fail "em dash (U+2014) found in repository"
 fi

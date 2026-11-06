@@ -7,9 +7,9 @@ A [Vale](https://vale.sh) style package for wording and punctuation checks. Repo
 | Rule | Checks | Reason |
 | :--- | :--- | :--- |
 | `HouseStyle.Promotional` | Promotional and generic AI phrasing, such as "seamless" or "cutting-edge" | Claims of quality without evidence tell the reader nothing. Name the property or behavior instead. |
-| `HouseStyle.Dashes` | The em dash (U+2014) | House typography uses a spaced en dash ( – ), as in Swedish and British usage. |
+| `HouseStyle.Dashes` | The em dash (U+2014) in Markdown and Swift, including code spans and string literals | House typography uses a spaced en dash ( – ), as in Swedish and British usage. |
 
-Rules live only in `HouseStyle/*.yml`. Code spans and fenced code blocks are not checked.
+Rules live only in `HouseStyle/*.yml`. `Promotional` skips code spans, fenced blocks and Swift string literals, and checks Swift comments. `Dashes` uses the `raw` scope, so it also covers code and string literals; write the escape `\u{2014}` in Swift when the character itself is needed. Consumers need no config beyond the pin and `BasedOnStyles = HouseStyle` for the file types they check.
 
 ## Use in a repository
 
@@ -18,7 +18,7 @@ Pin a release in `.vale.ini`, then run `vale sync`:
 ```ini
 StylesPath = .vale/styles
 MinAlertLevel = error
-Packages = https://github.com/rubenluthman/house-style/releases/download/v0.1.0/HouseStyle.zip
+Packages = https://github.com/rubenluthman/house-style/releases/download/v0.1.1/HouseStyle.zip
 
 [*.md]
 BasedOnStyles = HouseStyle
