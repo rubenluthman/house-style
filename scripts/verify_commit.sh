@@ -35,13 +35,13 @@ echo "2. should-pass.md raises no alerts..."
 out="$(run tests/should-pass.md)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"
 
-echo "3. should-alert.swift flags the dash in a string and in a comment, promo only in comments..."
-out="$(run tests/should-alert.swift)"
+echo "3. ShouldAlert.swift flags the dash in a string and in a comment, promo only in comments..."
+out="$(run tests/ShouldAlert.swift)"
 [ "$(count "$out" HouseStyle.Dashes)" = "2" ] || fail "expected two Dashes alerts in Swift (string and comment)"
 has "$out" seamless || fail "expected Promotional alert for 'seamless' in a comment"
 
-echo "4. should-pass.swift raises no alerts..."
-out="$(run tests/should-pass.swift)"
+echo "4. ShouldPass.swift raises no alerts..."
+out="$(run tests/ShouldPass.swift)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"
 
 echo "5. no em dashes in the repository..."
