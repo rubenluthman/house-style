@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Reworded the standard house style paragraph; repositories must replace their copy.
+
 ## [0.2.0] - 2026-11-06
 
 - Added the `Filler` rule for vague filler and stock figures of speech, split out of `Promotional`.
