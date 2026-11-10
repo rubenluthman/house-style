@@ -1,0 +1,30 @@
+extends: capitalization
+message: "'%s' should use sentence case: capitalize the first word, the first word after a colon, and proper nouns only. American technical style guides, including Microsoft's and Google's, write headings this way, and one convention keeps every document consistent."
+level: error
+scope: heading
+match: $sentence
+indicators:
+  - ":"
+prefix: '^\d+(\.\d+)*\.?\s'
+exceptions:
+  - "[A-Z][A-Z0-9./'-]*[A-Z0-9]"
+  - '[a-z]+[A-Z]\w*'
+  - '[A-Z]\w*[A-Z]\w*'
+  - '\S+\.[a-z]{1,5}'
+  - 'v\d[\w.-]*'
+  - Apple
+  - Claude
+  - Cloudflare
+  - Codex
+  - English
+  - Git
+  - Google
+  - Judarn
+  - Offentlig
+  - React
+  - Svelte
+  - Swedish
+  - Swift
+  - Vale
+  - Xcode
+  - house-style

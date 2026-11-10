@@ -31,6 +31,9 @@ for want in "delve" "testament to" "rich tapestry" "beacon of" "nestled"; do
     || fail "expected Filler alert for '$want'"
 done
 
+echo "1c. Title Case headings raise HouseStyle.Headings..."
+[ "$(count "$out" HouseStyle.Headings)" = "4" ] || fail "expected four Headings alerts"
+
 echo "2. should-pass.md raises no alerts..."
 out="$(run tests/should-pass.md)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"

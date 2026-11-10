@@ -1,6 +1,6 @@
 # house-style
 
-A [Vale](https://vale.sh) style package for wording and punctuation checks. Repositories load it at a tagged release, so every project applies the same rules and a rule change reaches them from one place.
+A [Vale](https://vale.sh) style package for wording, punctuation, and heading checks. Repositories load it at a tagged release, so every project applies the same rules and a rule change reaches them from one place.
 
 ## Rules
 
@@ -9,8 +9,11 @@ A [Vale](https://vale.sh) style package for wording and punctuation checks. Repo
 | `HouseStyle.Promotional` | Promotional and generic phrasing, such as "seamless" or "cutting-edge" | Claims of quality without evidence tell the reader nothing. Name the property or behavior instead. |
 | `HouseStyle.Filler` | Vague filler and stock figures of speech, such as "delve" or "testament to" | Padding delays the fact the sentence is there to state. |
 | `HouseStyle.Dashes` | The em dash (U+2014) in Markdown and Swift, including code spans and string literals | House typography uses a spaced en dash ( – ), as in Swedish and British usage. |
+| `HouseStyle.Headings` | Markdown headings that break sentence case, at `error` level | American technical style guides, including Microsoft's and Google's, write headings in sentence case. One convention keeps every document consistent. |
 
 Rules live only in `HouseStyle/*.yml`. `Promotional` skips code spans, fenced blocks and Swift string literals, and checks Swift comments. `Dashes` uses the `raw` scope, so it also covers code and string literals; write the escape `\u{2014}` in Swift when the character itself is needed. Consumers need no config beyond the pin and `BasedOnStyles = HouseStyle` for the file types they check.
+
+`Headings` capitalizes the first word and the first word after a colon, and it skips code spans, numbered prefixes, acronyms, CamelCase words and file names. It reads only Markdown headings, so body text, chat, commit messages and designed work under Judarn are not affected. Names that only one repository uses (a product, a library, a font family) go in that repository's own Vale vocabulary, a plain word list with one word per line, as `Vocab = House` in `.vale.ini` and `.vale/styles/config/vocabularies/House/accept.txt`; multi-word entries do not work there, so list each word separately. Wrap a version label before a colon in backticks (`` `v1`: Read-only ``) or write "Version 1: Read-only", since Vale reads a bare `v1:` as a miscased word. Wrap the quoted title of a work in backticks, or add its words to the vocabulary, to keep its own capitals.
 
 ## Use in a repository
 
@@ -19,7 +22,7 @@ Pin a release in `.vale.ini`, then run `vale sync`:
 ```ini
 StylesPath = .vale/styles
 MinAlertLevel = error
-Packages = https://github.com/rubenluthman/house-style/releases/download/v0.2.1/HouseStyle.zip
+Packages = https://github.com/rubenluthman/house-style/releases/download/v0.3.0/HouseStyle.zip
 
 [*.md]
 BasedOnStyles = HouseStyle
@@ -38,7 +41,7 @@ Where CI runs the check, the local `verify_commit.sh` skips the Vale step with a
 Copy the paragraph below verbatim into `CONTRIBUTING.md` (or `docs/` when the repository has none).
 
 <!-- house-style-paragraph:start -->
-This project follows a shared house style for wording and punctuation. It asks for concrete properties instead of claims of quality, and for facts instead of filler. Parenthetical breaks require a spaced en dash ( – ) instead of an em dash, following Swedish and British typographic standards. [Vale](https://vale.sh) enforces these checks via the [house-style](https://github.com/rubenluthman/house-style) package, and each rule's message gives its reason.
+This project follows a shared house style for wording, punctuation, and headings. It asks for concrete properties instead of claims of quality, and for facts instead of filler. Parenthetical breaks require a spaced en dash ( – ) instead of an em dash, following Swedish and British typographic standards. Headings use sentence case, as in American technical style guides. [Vale](https://vale.sh) enforces these checks via the [house-style](https://github.com/rubenluthman/house-style) package, and each rule's message gives its reason.
 <!-- house-style-paragraph:end -->
 
 ## Development

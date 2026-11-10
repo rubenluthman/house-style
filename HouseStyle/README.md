@@ -1,3 +1,3 @@
 # HouseStyle
 
-Vale rules for wording and punctuation. See the repository `README.md` for usage.
+Vale rules for wording, punctuation, and headings. See the repository `README.md` for usage.

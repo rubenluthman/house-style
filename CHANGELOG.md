@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-10
+
+- Added the `Headings` rule: Markdown headings use sentence case (`error` level), with the first word after a colon capitalized.
 - Limited the CI prose check to repositories that take outside contributions (they have a `CONTRIBUTING.md`); other repositories keep failing locally when `vale` is missing.
+- Reworded the standard house style paragraph; repositories must replace their copy.
 
 ## [0.2.1] - 2026-11-10
 
