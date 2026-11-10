@@ -27,6 +27,12 @@ BasedOnStyles = HouseStyle
 
 Add `.vale/styles/HouseStyle` to `.gitignore`; `vale sync` restores it. Run `vale sync` again whenever the pinned release changes, not only when the style folder is missing; otherwise a version bump keeps running the old cached rules. The pattern: compare the `Packages` line in `.vale.ini` with a `.pin` stamp that `verify_commit.sh` writes inside `.vale/styles/HouseStyle/` after each successful sync, and resync when they differ. Run `vale --output=JSON .` or plain `vale .` in `verify_commit.sh`. Add local rules only for file types this package does not cover. List `vale` as a verification dependency in the repository's `AGENTS.md`.
 
+### CI and local runs
+
+A repository with a CI workflow runs the prose check there, on changes to prose files (`**.md`, `**.txt`, `.vale.ini`). The workflow installs a pinned Vale release and checks its SHA-256 before running it.
+
+Where CI runs the check, the local `verify_commit.sh` skips the Vale step with a notice when `vale` is missing, pointing contributors to [vale.sh/docs/install](https://vale.sh/docs/install). It fails on a missing `vale` only when the `CI` environment variable is set. A repository without that CI step keeps failing locally when `vale` is missing.
+
 ## House style paragraph
 
 Copy the paragraph below verbatim into `CONTRIBUTING.md` (or `docs/` when the repository has none).

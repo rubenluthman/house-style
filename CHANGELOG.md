@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - Reworded the standard house style paragraph; repositories must replace their copy.
+- Documented the CI prose check and the local skip-with-notice behavior in the README.
 
 ## [0.2.0] - 2026-11-06
 
