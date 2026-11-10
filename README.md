@@ -29,9 +29,9 @@ Add `.vale/styles/HouseStyle` to `.gitignore`; `vale sync` restores it. Run `val
 
 ### CI and local runs
 
-A repository with a CI workflow runs the prose check there, on changes to prose files (`**.md`, `**.txt`, `.vale.ini`). The workflow installs a pinned Vale release and checks its SHA-256 before running it.
+A repository that takes outside contributions (it has a `CONTRIBUTING.md`) runs the prose check in CI, on changes to the prose file types the repository checks (for example `**.md`), plus `.vale.ini`. The workflow installs a pinned Vale release and checks its SHA-256 before running it.
 
-Where CI runs the check, the local `verify_commit.sh` skips the Vale step with a notice when `vale` is missing, pointing contributors to [vale.sh/docs/install](https://vale.sh/docs/install). It fails on a missing `vale` only when the `CI` environment variable is set. A repository without that CI step keeps failing locally when `vale` is missing.
+Where CI runs the check, the local `verify_commit.sh` skips the Vale step with a notice when `vale` is missing, pointing contributors to [vale.sh/docs/install](https://vale.sh/docs/install). It fails on a missing `vale` only when the `CI` environment variable is set. Any other repository keeps failing locally when `vale` is missing.
 
 ## House style paragraph
 
