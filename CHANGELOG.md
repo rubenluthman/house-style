@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Limited the CI prose check to repositories that take outside contributions (they have a `CONTRIBUTING.md`); other repositories keep failing locally when `vale` is missing.
+
 ## [0.2.1] - 2026-11-10
 
 - Reworded the standard house style paragraph; repositories must replace their copy.
