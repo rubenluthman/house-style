@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-11
+
+- Corrected the README guidance for names in headings: wrap the one heading in an inline `vale HouseStyle.Headings` NO/YES comment pair instead of using a vocabulary.
+- Documented that vocabulary files should not be used with `Headings`, because Vale then flags headings that contain a comma.
+
 ## [0.3.0] - 2026-11-10
 
 - Added the `Headings` rule: Markdown headings use sentence case (`error` level), with the first word after a colon capitalized.
