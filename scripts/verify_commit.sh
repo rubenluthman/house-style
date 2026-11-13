@@ -51,4 +51,10 @@ echo "5. no em dashes in the repository..."
 if git ls-files -z --cached --others --exclude-standard | xargs -0 grep -l $'\xe2\x80\x94' 2>/dev/null; then
   fail "em dash (U+2014) found in repository"
 fi
+
+echo "6. no home-directory paths or access tokens in the repository..."
+if git ls-files -z --cached --others --exclude-standard -- . ':!scripts/verify_commit.sh' \
+  | xargs -0 grep -nIE '/Users/[A-Za-z0-9_.-]+|/home/[A-Za-z0-9_.-]+|~/[A-Za-z.]|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9-]{20,}|AKIA[0-9A-Z]{16}' 2>/dev/null; then
+  fail "home path or token found in repository"
+fi
 echo "OK"

@@ -13,7 +13,7 @@ A [Vale](https://vale.sh) style package for wording, punctuation, and heading ch
 
 Rules live only in `HouseStyle/*.yml`. `Promotional` skips code spans, fenced blocks and Swift string literals, and checks Swift comments. `Dashes` uses the `raw` scope, so it also covers code and string literals; write the escape `\u{2014}` in Swift when the character itself is needed. Consumers need no config beyond the pin and `BasedOnStyles = HouseStyle` for the file types they check.
 
-`Headings` capitalizes the first word and the first word after a colon, and it skips code spans, numbered prefixes, acronyms, CamelCase words and file names. It reads only Markdown headings, so body text, chat, commit messages and designed work under Judarn are not affected. For a name that only one repository uses (a product, a library, a font family) in a heading that Vale flags, wrap that one heading in the inline comment pair `<!-- vale HouseStyle.Headings = NO -->` before it and `<!-- vale HouseStyle.Headings = YES -->` after it. Do not use Vale vocabulary files for this: with any vocabulary present, Vale also flags headings that contain a comma. Wrap a version label before a colon in backticks (`` `v1`: Read-only ``) or write "Version 1: Read-only", since Vale reads a bare `v1:` as a miscased word. Wrap the quoted title of a work in backticks to keep its own capitals.
+`Headings` capitalizes the first word and the first word after a colon, and it skips code spans, numbered prefixes, acronyms, CamelCase words and file names. It reads only Markdown headings, so body text, chat, commit messages and designed work under Judarn are not affected. This package lists only names shared across projects. A repository allows its own names (a product, a library, a font family) once, in its own `.vale.ini` under `[*.md]`: `TokenIgnores = (\bExample\b), (\bExample Kit\b)`, one entry per name and a multi-word name as one entry. Vale then reads each name like a code span and still checks the rest of the heading, so `Example Kit Release Notes` is flagged. For a single heading, the inline comment pair `<!-- vale HouseStyle.Headings = NO -->` before it and `<!-- vale HouseStyle.Headings = YES -->` after it also works. Do not use Vale vocabulary files for this: with any vocabulary present, Vale also flags headings that contain a comma or a capitalized word after a colon. Wrap a version label before a colon in backticks (`` `v1`: Read-only ``) or write "Version 1: Read-only", since Vale reads a bare `v1:` as a miscased word. Wrap the quoted title of a work in backticks to keep its own capitals.
 
 ## Use in a repository
 
@@ -22,7 +22,7 @@ Pin a release in `.vale.ini`, then run `vale sync`:
 ```ini
 StylesPath = .vale/styles
 MinAlertLevel = error
-Packages = https://github.com/rubenluthman/house-style/releases/download/v0.3.1/HouseStyle.zip
+Packages = https://github.com/rubenluthman/house-style/releases/download/v0.3.2/HouseStyle.zip
 
 [*.md]
 BasedOnStyles = HouseStyle

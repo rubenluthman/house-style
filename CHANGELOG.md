@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-11-13
+
+- Documented `TokenIgnores` in a repository's own `.vale.ini` as the one place to allow its own names in headings; the rules are unchanged from 0.3.1.
+- `verify_commit.sh` now fails on home-directory paths and access tokens in tracked files.
+
 ## [0.3.1] - 2026-11-11
 
 - Corrected the README guidance for names in headings: wrap the one heading in an inline `vale HouseStyle.Headings` NO/YES comment pair instead of using a vocabulary.
