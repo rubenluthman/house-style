@@ -20,13 +20,13 @@ has() { echo "$1" | jq -e --arg w "$2" '[.[][] | select(.Check=="HouseStyle.Prom
 
 echo "1. should-alert.md raises every expected check..."
 out="$(run tests/should-alert.md)"
-for want in seamless cutting-edge game-changer revolutionize revolutionise; do
+for want in seamless cutting-edge game-changer game-changers revolutionize revolutionizes revolutionise revolutionised unleashes unleashed "robust solutions"; do
   has "$out" "$want" || fail "expected Promotional alert for '$want'"
 done
 [ "$(count "$out" HouseStyle.Dashes)" = "2" ] || fail "expected two Dashes alerts (prose and code span)"
 
 echo "1b. Filler tokens raise HouseStyle.Filler..."
-for want in "delve" "testament to" "rich tapestry" "beacon of" "nestled"; do
+for want in "delve" "delves" "delved" "delving" "testament to" "testaments to" "rich tapestry" "beacon of" "beacons of" "nestled"; do
   echo "$out" | jq -e --arg w "$want" '[.[][] | select(.Check=="HouseStyle.Filler" and (.Match|ascii_downcase)==$w)] | length >= 1' >/dev/null \
     || fail "expected Filler alert for '$want'"
 done
@@ -42,10 +42,25 @@ echo "3. ShouldAlert.swift flags the dash in a string and in a comment, promo on
 out="$(run tests/ShouldAlert.swift)"
 [ "$(count "$out" HouseStyle.Dashes)" = "2" ] || fail "expected two Dashes alerts in Swift (string and comment)"
 has "$out" seamless || fail "expected Promotional alert for 'seamless' in a comment"
+echo "$out" | jq -e '[.[][] | select(.Check=="HouseStyle.Filler" and (.Match|ascii_downcase)=="delve")] | length == 1' >/dev/null \
+  || fail "expected one Filler alert for 'delve' in a Swift comment only"
 
 echo "4. ShouldPass.swift raises no alerts..."
 out="$(run tests/ShouldPass.swift)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"
+
+echo "4b. the repository's own docs raise no alerts (tests/ is excluded: its fixtures are meant to alert)..."
+out="$(vale --output=JSON README.md CHANGELOG.md AGENTS.md HouseStyle/README.md || true)"
+[ "$(echo "$out" | jq 'length')" = "0" ] || fail "alerts in own docs: $(echo "$out" | jq -c '[to_entries[] | .key as $f | .value[] | {File:$f,Line,Match}]')"
+
+echo "4c. relative Markdown links resolve..."
+for f in README.md CHANGELOG.md AGENTS.md HouseStyle/README.md; do
+  while IFS= read -r link; do
+    target="${link#\]\(}"; target="${target%\)}"; target="${target%%#*}"
+    case "$target" in ""|http*|mailto:*) continue ;; esac
+    [ -e "$(dirname "$f")/$target" ] || fail "broken link in $f: $target"
+  done < <(grep -o '\]([^)]*)' "$f" || true)
+done
 
 echo "5. no em dashes in the repository..."
 if git ls-files -z --cached --others --exclude-standard | xargs -0 grep -l $'\xe2\x80\x94' 2>/dev/null; then
@@ -54,7 +69,7 @@ fi
 
 echo "6. no home-directory paths or access tokens in the repository..."
 if git ls-files -z --cached --others --exclude-standard -- . ':!scripts/verify_commit.sh' \
-  | xargs -0 grep -nIE '/Users/[A-Za-z0-9_.-]+|/home/[A-Za-z0-9_.-]+|~/[A-Za-z.]|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9-]{20,}|AKIA[0-9A-Z]{16}' 2>/dev/null; then
+  | xargs -0 grep -nIE '/Users/[A-Za-z0-9_.-]+|/home/[A-Za-z0-9_.-]+|~/[A-Za-z.]|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----' 2>/dev/null; then
   fail "home path or token found in repository"
 fi
 echo "OK"

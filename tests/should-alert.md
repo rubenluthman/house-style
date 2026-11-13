@@ -9,6 +9,10 @@ An inline code span with `a @@EMDASH@@ b` also alerts, as the house rule bans th
 
 We delve in, a testament to craft, a Rich Tapestry, a beacon of hope, nestled in the hills.
 
+She delves and delved and keeps delving.
+These testaments to craft are beacons of hope.
+Two game-changers, a revolutionizes and revolutionised claim, it unleashes and unleashed things, and robust solutions.
+
 ## Bad Title Case Heading
 
 ## Quick Start

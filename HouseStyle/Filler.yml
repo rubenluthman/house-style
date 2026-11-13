@@ -4,8 +4,8 @@ level: error
 ignorecase: true
 scope: text
 tokens:
-  - delve
-  - testament to
+  - delv(e|es|ed|ing)
+  - testaments? to
   - rich tapestry
-  - beacon of
+  - beacons? of
   - nestled

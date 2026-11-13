@@ -37,3 +37,11 @@ seamless cutting-edge delve
 ## Notes on README.md and CHANGELOG.md
 
 ## Install with Git and Xcode
+
+## How I built this
+
+## Option A and option B
+
+## Wi-Fi setup
+
+## Linux and Python setup

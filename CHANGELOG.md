@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-11-13
+
+- `Headings` no longer flags single capital letters (`Option A and option B`) and allows `Wi-Fi`, `Linux`, `Markdown` and `Python`.
+- `Promotional` and `Filler` now catch word forms such as `delves`, `testaments to`, `game-changers`, `revolutionizes` and `robust solutions`.
+- Corrected the README `TokenIgnores` advice: one alternation entry when one name starts another.
+
 ## [0.3.2] - 2026-11-13
 
 - Documented `TokenIgnores` in a repository's own `.vale.ini` as the one place to allow its own names in headings; the rules are unchanged from 0.3.1.

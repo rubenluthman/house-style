@@ -7,6 +7,7 @@ indicators:
   - ":"
 prefix: '^\d+(\.\d+)*\.?\s'
 exceptions:
+  - '^[A-Z]$'
   - "[A-Z][A-Z0-9./'-]*[A-Z0-9]"
   - '[a-z]+[A-Z]\w*'
   - '[A-Z]\w*[A-Z]\w*'
@@ -20,11 +21,15 @@ exceptions:
   - Git
   - Google
   - Judarn
+  - Linux
+  - Markdown
   - Offentlig
+  - Python
   - React
   - Svelte
   - Swedish
   - Swift
   - Vale
+  - Wi-Fi
   - Xcode
   - house-style
