@@ -22,7 +22,7 @@ Pin a release in `.vale.ini`, then run `vale sync`:
 ```ini
 StylesPath = .vale/styles
 MinAlertLevel = error
-Packages = https://github.com/rubenluthman/house-style/releases/download/v0.3.0/HouseStyle.zip
+Packages = https://github.com/rubenluthman/house-style/releases/download/v0.3.1/HouseStyle.zip
 
 [*.md]
 BasedOnStyles = HouseStyle
