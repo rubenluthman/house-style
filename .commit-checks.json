@@ -1,8 +1,34 @@
 {
-  "version": "v0.1.0",
-  "commit": "130a34b183c73762cb44933fc47c579f2cbca8fd",
+  "version": "v0.2.1",
+  "commit": "8c18c53fa1f441df2f4686cce7625b89c93906b8",
   "source": "https://github.com/rubenluthman/commit-checks.git",
   "visibility": "public",
   "email_allow": [],
-  "allow": []
+  "allow": [
+    {
+      "rule": "release-tags",
+      "path": "v0.1.0",
+      "reason": "created before the annotation rule; release tags are immutable"
+    },
+    {
+      "rule": "release-tags",
+      "path": "v0.1.1",
+      "reason": "created before the annotation rule; release tags are immutable"
+    },
+    {
+      "rule": "release-tags",
+      "path": "v0.2.0",
+      "reason": "created before the annotation rule; release tags are immutable"
+    },
+    {
+      "rule": "release-tags",
+      "path": "v0.3.0",
+      "reason": "created before the annotation rule; release tags are immutable"
+    },
+    {
+      "rule": "release-tags",
+      "path": "v0.3.1",
+      "reason": "created before the annotation rule; release tags are immutable"
+    }
+  ]
 }

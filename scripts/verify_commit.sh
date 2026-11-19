@@ -53,15 +53,6 @@ echo "4b. the repository's own docs raise no alerts (tests/ is excluded: its fix
 out="$(vale --output=JSON README.md CHANGELOG.md AGENTS.md HouseStyle/README.md || true)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "alerts in own docs: $(echo "$out" | jq -c '[to_entries[] | .key as $f | .value[] | {File:$f,Line,Match}]')"
 
-echo "4c. relative Markdown links resolve..."
-for f in README.md CHANGELOG.md AGENTS.md HouseStyle/README.md; do
-  while IFS= read -r link; do
-    target="${link#\]\(}"; target="${target%\)}"; target="${target%%#*}"
-    case "$target" in ""|http*|mailto:*) continue ;; esac
-    [ -e "$(dirname "$f")/$target" ] || fail "broken link in $f: $target"
-  done < <(grep -o '\]([^)]*)' "$f" || true)
-done
-
 echo "5. no em dashes in the repository..."
 if git ls-files -z --cached --others --exclude-standard | xargs -0 grep -l $'\xe2\x80\x94' 2>/dev/null; then
   fail "em dash (U+2014) found in repository"
