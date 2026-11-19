@@ -12,6 +12,10 @@
 - `Promotional` and `Filler` now catch word forms such as `delves`, `testaments to`, `game-changers`, `revolutionizes` and `robust solutions`.
 - Corrected the README `TokenIgnores` advice: one alternation entry when one name starts another.
 
+## [0.3.3] - 2026-11-13
+
+- No changes from 0.3.2. The `v0.3.3` tag has no release download; pin 0.3.4 or later.
+
 ## [0.3.2] - 2026-11-13
 
 - Documented `TokenIgnores` in a repository's own `.vale.ini` as the one place to allow its own names in headings; the rules are unchanged from 0.3.1.
