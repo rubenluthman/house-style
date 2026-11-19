@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- `Headings` allows `Mac`.
+
 ## [0.3.4] - 2026-11-13
 
 - `Headings` no longer flags single capital letters (`Option A and option B`) and allows `Wi-Fi`, `Linux`, `Markdown` and `Python`.
