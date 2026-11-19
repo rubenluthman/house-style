@@ -6,5 +6,5 @@ Vale style package (`HouseStyle/`) loaded by other repositories through Vale's `
 - The house style paragraph lives only in `README.md`, between the `house-style-paragraph` markers.
 - Never write a literal em dash in any file; fixtures use `@@EMDASH@@`.
 - This repository is public. Never name the owner's private projects or repositories, their paths, or their decision records in files, commit messages, tags, or release notes. A name one project uses belongs in that project's `TokenIgnores`.
-- Verify with `./scripts/verify_commit.sh` (needs `vale`, `jq`). Release zip: `./scripts/build_release.sh`.
+- Verify with `./scripts/verify_commit.sh` (needs `vale`, `jq`, `gitleaks`). Run `scripts/install-hooks.sh` once after cloning; generic commit checks come from the shared commit-checks package at the release pinned in `.commit-checks.json`. Release zip: `./scripts/build_release.sh`.
 - Tags are immutable; repositories pin them. Add words by releasing a new tag.
