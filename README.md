@@ -47,9 +47,12 @@ This project follows a shared house style for wording, punctuation, and headings
 ## Development
 
 ```bash
-./scripts/verify_commit.sh   # fixture tests; needs vale and jq
+./scripts/test_rules.sh      # fixture tests; needs vale and jq
+./scripts/verify_commit.sh   # rule tests plus shared commit checks
 ./scripts/build_release.sh   # writes dist/HouseStyle.zip
 ```
+
+The pre-push hook and CI run the rule tests, so a broken rule fails before it can be tagged.
 
 Fixtures in `tests/` use the placeholder `@@EMDASH@@`, which the script replaces with U+2014 in a temporary copy, so the repository never contains an em dash.
 
