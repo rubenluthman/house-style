@@ -33,6 +33,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Install Vale 3.26.0
         run: |
+          cd "$RUNNER_TEMP"
           curl -sSfL -o vale.tar.gz https://github.com/vale-cli/vale/releases/download/v3.26.0/vale_3.26.0_Linux_64-bit.tar.gz
           echo "22aa69a556558e4a9dfc63c17030777383d8d3c48dcdfad655fa98e839d666ed  vale.tar.gz" | sha256sum -c -
           tar -xzf vale.tar.gz vale
