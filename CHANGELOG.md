@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.6] - 2026-11-23
+
 - `Headings` no longer allows `Offentlig`; a repository that uses the name adds it to its own `TokenIgnores`.
 
 ## [0.3.5] - 2026-11-19
