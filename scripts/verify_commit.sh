@@ -50,7 +50,7 @@ out="$(run tests/ShouldPass.swift)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "unexpected alerts: $(echo "$out" | jq -c '[.[][] | {Line,Match}]')"
 
 echo "4b. the repository's own docs raise no alerts (tests/ is excluded: its fixtures are meant to alert)..."
-out="$(vale --output=JSON README.md CHANGELOG.md AGENTS.md HouseStyle/README.md || true)"
+out="$(vale --output=JSON README.md CHANGELOG.md AGENTS.md ROADMAP.md HouseStyle/README.md || true)"
 [ "$(echo "$out" | jq 'length')" = "0" ] || fail "alerts in own docs: $(echo "$out" | jq -c '[to_entries[] | .key as $f | .value[] | {File:$f,Line,Match}]')"
 
 echo "5. no em dashes in the repository..."

@@ -11,3 +11,6 @@ dist/
 *.pem
 *.mobileprovision
 id_*
+
+# Private notes and plans
+docs/private/
