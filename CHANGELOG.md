@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- `Headings` no longer allows `Offentlig`; a repository that uses the name adds it to its own `TokenIgnores`.
+
 ## [0.3.5] - 2026-11-19
 
 - `Headings` allows `Mac`.
