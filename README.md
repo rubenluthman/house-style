@@ -55,8 +55,10 @@ Fixtures in `tests/` use the placeholder `@@EMDASH@@`, which the script replaces
 
 ## Releasing
 
-1. Update `CHANGELOG.md`, run `verify_commit.sh`, commit, and tag `vX.Y.Z`.
-2. Run `build_release.sh` and attach `dist/HouseStyle.zip` to the GitHub release for that tag.
+1. Update `CHANGELOG.md` with a `## [X.Y.Z]` section, run `verify_commit.sh`, and commit.
+2. Create an annotated tag `vX.Y.Z` and push it. Pushing the tag is the release decision: the `release` workflow builds `dist/HouseStyle.zip` and publishes the GitHub release with that CHANGELOG section as its notes.
+
+The workflow fails if the CHANGELOG has no section for the tag, if the release already exists, or if the archive layout is wrong. Run it by hand (`gh workflow run release.yml`) to test it: it builds and uploads the zip as a workflow artifact without publishing.
 
 The archive holds one top-level `HouseStyle/` folder, as Vale's [packages documentation](https://docs.vale.sh/keys/packages) requires.
 
