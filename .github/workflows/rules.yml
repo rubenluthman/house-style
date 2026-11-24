@@ -3,21 +3,7 @@ name: rules
 on:
   push:
     branches: [main]
-    paths:
-      - "HouseStyle/**"
-      - "tests/**"
-      - "scripts/**"
-      - "**.md"
-      - ".vale.ini"
-      - ".github/workflows/rules.yml"
   pull_request:
-    paths:
-      - "HouseStyle/**"
-      - "tests/**"
-      - "scripts/**"
-      - "**.md"
-      - ".vale.ini"
-      - ".github/workflows/rules.yml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
