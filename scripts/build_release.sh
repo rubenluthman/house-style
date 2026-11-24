@@ -2,5 +2,5 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 rm -rf dist && mkdir dist
-zip -qr dist/HouseStyle.zip HouseStyle -x '*.DS_Store'
+git archive --format=zip -o dist/HouseStyle.zip HEAD HouseStyle
 unzip -l dist/HouseStyle.zip
