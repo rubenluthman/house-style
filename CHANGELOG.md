@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- `Headings` now accepts a lowercase word after a colon that follows an acronym or listed name (`API: overview` is flagged, `API: Overview` passes), leading numbers (`2026 release notes`), single letters with punctuation, and `I` contractions. Title Case words that merely contain a listed name (`State Machines`, `Add Reactions`) now alert.
+- `Promotional` also catches `game changer`, `state of the art`, `cutting edge`, `world class`, `best in class`, `ground-breaking` and `blazingly`.
+
 ## [0.3.6] - 2026-11-23
 
 - `Headings` no longer allows `Offentlig`; a repository that uses the name adds it to its own `TokenIgnores`.

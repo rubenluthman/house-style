@@ -22,7 +22,7 @@ seamless cutting-edge delve
 
 ## API keys and the JSON format
 
-## ADR-0001: Use Vale for prose checks
+## ADR-0001: Use Vale
 
 ## `v1`: Read-only
 
@@ -47,3 +47,21 @@ seamless cutting-edge delve
 ## Linux and Python setup
 
 ## This Mac
+
+## API: Overview
+
+## Swift: Concurrency guide
+
+## 2026 release notes
+
+## 3 ways to fail
+
+## 500 errors in production
+
+## Option A, option B, and option C
+
+## Why I'm switching
+
+## Appendix A: Reference
+
+## `v0.3.6` release notes

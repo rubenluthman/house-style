@@ -5,31 +5,13 @@ scope: heading
 match: $sentence
 indicators:
   - ":"
-prefix: '^\d+(\.\d+)*\.?\s'
+prefix: '^(?:\d+\.)+\d*\s'
 exceptions:
-  - '^[A-Z]$'
-  - "[A-Z][A-Z0-9./'-]*[A-Z0-9]"
-  - '[a-z]+[A-Z]\w*'
-  - '[A-Z]\w*[A-Z]\w*'
-  - '\S+\.[a-z]{1,5}'
-  - 'v\d[\w.-]*'
-  - Apple
-  - Claude
-  - Cloudflare
-  - Codex
-  - English
-  - Git
-  - Google
-  - Judarn
-  - Linux
-  - Mac
-  - Markdown
-  - Python
-  - React
-  - Svelte
-  - Swedish
-  - Swift
-  - Vale
-  - Wi-Fi
-  - Xcode
-  - house-style
+  - '^[A-Z][:,]?$'
+  - "^I(?:['\u2019](?:m|ve|ll|d))?[:,]?$"
+  - '^\[?[A-Z][A-Z0-9./''-]*[A-Z0-9]\]?(?:''?s)?[:,]?$'
+  - '^[a-z]+[A-Z]\w*[:,]?$'
+  - '^[A-Z]\w*[A-Z]\w*[:,]?$'
+  - '^\S+\.[a-z]{1,5}[:,]?$'
+  - '^v\d[\w.-]*[:,]?$'
+  - '^(?:Apple|Claude|Cloudflare|Codex|English|Git|Google|Judarn|Linux|Mac|Markdown|Python|React|Svelte|Swedish|Swift|Vale|Wi-Fi|Xcode|house-style)[:,]?$'
