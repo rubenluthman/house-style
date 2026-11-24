@@ -39,6 +39,15 @@ jobs:
           fi
           echo "TAG=$tag" >> "$GITHUB_ENV"
           echo "VERSION=$version" >> "$GITHUB_ENV"
+      - name: Require an annotated tag
+        if: github.event_name == 'push'
+        run: |
+          # Checkout may fetch only the commit, so fetch the tag object itself.
+          git fetch --force origin "refs/tags/$TAG:refs/tags/$TAG"
+          if [ "$(git cat-file -t "refs/tags/$TAG")" != tag ]; then
+            echo "::error::$TAG is a lightweight tag; create it with git tag -a"
+            exit 1
+          fi
       - name: Take the release notes from CHANGELOG.md
         run: |
           awk -v h="## [$VERSION]" '
@@ -51,6 +60,22 @@ jobs:
             exit 1
           fi
           cat notes.md
+      - name: Install Vale 3.26.0
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -sSfL -o vale.tar.gz https://github.com/vale-cli/vale/releases/download/v3.26.0/vale_3.26.0_Linux_64-bit.tar.gz
+          echo "22aa69a556558e4a9dfc63c17030777383d8d3c48dcdfad655fa98e839d666ed  vale.tar.gz" | sha256sum -c -
+          tar -xzf vale.tar.gz vale
+          sudo mv vale /usr/local/bin/vale
+      - name: Install gitleaks 8.30.1
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -sSfL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+      - name: Rule tests
+        run: scripts/test_rules.sh
       - name: Build the archive
         run: scripts/build_release.sh
       - name: Check the archive layout
@@ -60,6 +85,10 @@ jobs:
             echo "::error::Archive must hold exactly one top-level HouseStyle/ folder, found: $tops"
             exit 1
           fi
+      - name: Scan the archive
+        run: scripts/commit-checks scan-archive dist/HouseStyle.zip
+      - name: Load the archive like a consuming repository
+        run: scripts/test_archive.sh
       - name: Upload the archive as a workflow artifact
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
