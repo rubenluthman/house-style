@@ -32,9 +32,9 @@ Add `.vale/styles/HouseStyle` to `.gitignore`; `vale sync` restores it. Run `val
 
 ### CI and local runs
 
-A repository that takes outside contributions (it has a `CONTRIBUTING.md` at the root or in `docs/`) runs the prose check in CI, on changes to the prose file types the repository checks (for example `**.md`), plus `.vale.ini`. The workflow installs a pinned Vale release and checks its SHA-256 before running it.
+A repository that takes outside contributions (it has a `CONTRIBUTING.md` at the root) runs the prose check in CI, on changes to the prose file types the repository checks (for example `**.md`), plus `.vale.ini`. The workflow installs a pinned Vale release and checks its SHA-256 before running it.
 
-Where CI runs the check, the local verification script skips the Vale step with a notice when `vale` is missing, pointing contributors to [vale.sh/docs/install](https://vale.sh/docs/install). It fails on a missing `vale` only when the `CI` environment variable is set. Any other repository keeps failing locally when `vale` is missing.
+Where CI runs the check, the local verification script skips the Vale step with a notice when `vale` is missing (the notice says `brew install vale`). It fails on a missing `vale` only when the `CI` environment variable is set. Any other repository keeps failing locally when `vale` is missing.
 
 ## House style paragraph
 
@@ -46,10 +46,13 @@ This project follows a shared house style for wording, punctuation, and headings
 
 ## Development
 
+Run `scripts/install-hooks.sh` once after cloning to install the Git hooks. `verify_commit.sh` needs `vale`, `jq` and `gitleaks`.
+
 ```bash
 ./scripts/test_rules.sh      # fixture tests; needs vale and jq
 ./scripts/verify_commit.sh   # rule tests plus shared commit checks
-./scripts/build_release.sh   # writes dist/HouseStyle.zip
+./scripts/build_release.sh   # writes dist/HouseStyle.zip from tracked files
+./scripts/test_archive.sh    # loads dist/HouseStyle.zip with vale sync and checks two rules alert
 ```
 
 The pre-push hook and CI run the rule tests, so a broken rule fails before it can be tagged.
@@ -58,10 +61,10 @@ Fixtures in `tests/` use the placeholder `@@EMDASH@@`, which the script replaces
 
 ## Releasing
 
-1. Update `CHANGELOG.md` with a `## [X.Y.Z]` section, run `verify_commit.sh`, and commit.
-2. Create an annotated tag `vX.Y.Z` and push it. Pushing the tag is the release decision: the `release` workflow builds `dist/HouseStyle.zip` and publishes the GitHub release with that CHANGELOG section as its notes.
+1. Update `CHANGELOG.md` with a `## [X.Y.Z]` section and the pinned version in the `Packages` example under "Use in a repository", run `verify_commit.sh`, and commit.
+2. Create an annotated tag with `git tag -a vX.Y.Z` and push `main` and the tag together. Pushing the tag is the release decision: the `release` workflow builds `dist/HouseStyle.zip` from tracked files and publishes the GitHub release with that CHANGELOG section as its notes.
 
-The workflow fails if the CHANGELOG has no section for the tag, if the release already exists, or if the archive layout is wrong. Run it by hand (`gh workflow run release.yml`) to test it: it builds and uploads the zip as a workflow artifact without publishing.
+Before publishing, the workflow runs the rule tests, rejects a lightweight tag, checks the archive layout, scans the archive, and loads it with `vale sync` to check that two rules alert. It also fails if the CHANGELOG has no section for the tag or if the release already exists. Run it by hand (`gh workflow run release.yml`) to test it: it runs every step except publishing and uploads the zip as a workflow artifact.
 
 The archive holds one top-level `HouseStyle/` folder, as Vale's [packages documentation](https://docs.vale.sh/keys/packages) requires.
 

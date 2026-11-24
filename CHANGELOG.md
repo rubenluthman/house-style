@@ -47,7 +47,6 @@
 ## [0.2.0] - 2026-11-06
 
 - Added the `Filler` rule for vague filler and stock figures of speech, split out of `Promotional`.
-- `Dashes` now flags em dashes in Swift string literals and Markdown code spans.
 - Reworded the standard house style paragraph; repositories must replace their copy.
 
 ## [0.1.1] - 2026-11-06
