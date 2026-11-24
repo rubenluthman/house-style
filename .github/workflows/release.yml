@@ -86,6 +86,8 @@ jobs:
             exit 1
           fi
       - name: Scan the archive
+        env:
+          COMMIT_CHECKS_PRIVATE_NAMES: ${{ secrets.COMMIT_CHECKS_PRIVATE_NAMES }}
         run: scripts/commit-checks scan-archive dist/HouseStyle.zip
       - name: Load the archive like a consuming repository
         run: scripts/test_archive.sh
