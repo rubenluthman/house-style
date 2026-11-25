@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.8] - 2026-11-25
+
 - `Headings` again accepts a listed name, acronym or CamelCase word next to brackets, quotes, `.`, `;`, `?` or `!`, as in `Apple native (SwiftUI)` or `Why Swift?`, which 0.3.7 flagged.
 
 ## [0.3.7] - 2026-11-24
