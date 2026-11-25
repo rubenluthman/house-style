@@ -2,8 +2,6 @@
 
 ## Active
 
-- read: `.githooks/pre-push` still lets a lightweight release tag through – create a tag without `-a` and push `vX.Y.Z`, and the hook accepts it, so the tag fails `verify_commit.sh` and commit-checks CI on later commits until allowlisted; `release.yml` already rejects it, and the hook fix belongs to the shared commit-checks package (`.githooks/pre-push:3`; `.commit-checks.json:7-33`).
-
 ## Icebox
 
 - Rules for more file types, such as TypeScript or Kotlin comments, once a repository that loads the package needs them. The package covers Markdown and Swift.
