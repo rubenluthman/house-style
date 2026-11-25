@@ -41,4 +41,10 @@ Two game-changers, a revolutionizes and revolutionised claim, it unleashes and u
 
 ## Add A Cache
 
+## Notes on (Swiftly) code
+
+## Fix Valet.
+
+## Ship "Machines" now
+
 Promotional tokens: seamless, seamlessly, cutting-edge, cutting edge, game-changer, game changer, game changers, game-changing, revolutionary, revolutionize, revolutionised, revolutionizing, groundbreaking, ground-breaking, unleash, unleashed, unleashing, world-class, world class, unleashes, state-of-the-art, state of the art, blazing, blazingly, robust solution, best-in-class, best in class, a robust solution.

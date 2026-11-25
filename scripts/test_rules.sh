@@ -42,7 +42,7 @@ done
 
 echo "1c. Title Case headings raise HouseStyle.Headings..."
 lines="$(echo "$out" | jq -c '[.[][] | select(.Check=="HouseStyle.Headings") | .Line]')"
-[ "$lines" = "[16,18,20,22,24,26,28,30,32,34,36,38,40,42]" ] || fail "Headings alerts on wrong lines: $lines"
+[ "$lines" = "[16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48]" ] || fail "Headings alerts on wrong lines: $lines"
 
 echo "2. should-pass.md raises no alerts..."
 out="$(run tests/should-pass.md)"

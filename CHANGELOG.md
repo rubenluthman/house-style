@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- `Headings` again accepts a listed name, acronym or CamelCase word next to brackets, quotes, `.`, `;`, `?` or `!`, as in `Apple native (SwiftUI)` or `Why Swift?`, which 0.3.7 flagged.
+
 ## [0.3.7] - 2026-11-24
 
 - `Headings` expects a capital after a colon that follows an acronym or listed name (`API: Overview`), and accepts headings that start with a number (`2026 release notes`), single letters before punctuation (`Option A, option B`) and `I` contractions.

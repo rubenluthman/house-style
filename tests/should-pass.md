@@ -65,3 +65,17 @@ seamless cutting-edge delve
 ## Appendix A: Reference
 
 ## `v0.3.6` release notes
+
+## Apple native (SwiftUI)
+
+## Web (React and CSS)
+
+## Keychain notes (ADR-0003)
+
+## Why Swift?
+
+## The "Swift" way
+
+## Apple's design rules
+
+## Use Swift; then Xcode
