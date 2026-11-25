@@ -6,15 +6,12 @@ match: $sentence
 indicators:
   - ":"
 prefix: '^(?:\d+\.)+\d*\s'
-# Vale splits a heading on spaces only, so each word keeps its punctuation:
-# every exception allows opening brackets and quotes before it and closing
-# ones, plus . , : ; ? !, after it, as in "(SwiftUI)" or "Why Swift?".
+# Vale splits a heading on spaces only, so each word keeps its punctuation and
+# a name joined by a slash is one word. One pattern matches a word in order:
+# opening brackets and quotes; one unit (single capital, I contraction,
+# acronym, CamelCase, file name, version, listed name); any number of "/unit"
+# or "/lowercase-word" parts; closing brackets and quotes plus . , : ; ? !
+# It is one pattern because a separate slash entry would repeat the name list,
+# and two copies drift.
 exceptions:
-  - '^[(\["''“‘]*[A-Z][)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*I(?:[''’](?:m|ve|ll|d))?[)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*[A-Z][A-Z0-9./''-]*[A-Z0-9](?:''?s)?[)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*[a-z]+[A-Z]\w*[)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*[A-Z]\w*[A-Z]\w*[)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*\S+\.[a-z]{1,5}[)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*v\d[\w.-]*[)\]"''”’.,:;?!]*$'
-  - '^[(\["''“‘]*(?:Apple|Claude|Cloudflare|Codex|English|Git|Google|Judarn|Linux|Mac|Markdown|Python|React|Svelte|Swedish|Swift|Vale|Wi-Fi|Xcode|house-style)(?:[''’]s)?[)\]"''”’.,:;?!]*$'
+  - '^[(\["''“‘]*(?:[A-Z]|I(?:[''’](?:m|ve|ll|d))?|[A-Z][A-Z0-9./''-]*[A-Z0-9](?:''?s)?|[a-z]+[A-Z]\w*|[A-Z]\w*[A-Z]\w*|\S+\.[a-z]{1,5}|v\d[\w.-]*|(?:Apple|Claude|Cloudflare|Codex|English|Git|Google|Judarn|Linux|Mac|Markdown|Python|React|Svelte|Swedish|Swift|Vale|Wi-Fi|Xcode|house-style)(?:[''’]s)?)(?:/(?:[A-Z]|I(?:[''’](?:m|ve|ll|d))?|[A-Z][A-Z0-9./''-]*[A-Z0-9](?:''?s)?|[a-z]+[A-Z]\w*|[A-Z]\w*[A-Z]\w*|\S+\.[a-z]{1,5}|v\d[\w.-]*|(?:Apple|Claude|Cloudflare|Codex|English|Git|Google|Judarn|Linux|Mac|Markdown|Python|React|Svelte|Swedish|Swift|Vale|Wi-Fi|Xcode|house-style)(?:[''’]s)?|[a-z][\w-]*))*[)\]"''”’.,:;?!]*$'

@@ -2,8 +2,6 @@
 
 ## Active
 
-- `Headings` flags two listed names joined by a slash, such as `React/Swift setup`, because each exception must match the whole space-separated word; 0.3.6 accepted it (`HouseStyle/Headings.yml`).
-
 ## Icebox
 
 - Rules for more file types, such as TypeScript or Kotlin comments, once a repository that loads the package needs them. The package covers Markdown and Swift.

@@ -79,3 +79,13 @@ seamless cutting-edge delve
 ## Apple's design rules
 
 ## Use Swift; then Xcode
+
+## React/Swift setup
+
+## Swift/Xcode notes
+
+## CI/CD pipeline
+
+## Swift/read access
+
+## macOS/iOS builds
