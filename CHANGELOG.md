@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.9] - 2026-11-25
+
 - `Headings` again accepts listed names joined by a slash, such as `React/Swift setup`.
 
 ## [0.3.8] - 2026-11-25
