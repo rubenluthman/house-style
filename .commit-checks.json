@@ -30,5 +30,16 @@
       "path": "v0.3.1",
       "reason": "created before the annotation rule; release tags are immutable"
     }
-  ]
+  ],
+  "release": {
+    "source": {
+      "type": "regex",
+      "path": "CHANGELOG.md",
+      "pattern": "(?m)\\A[\\s\\S]*?^## \\[(\\d+\\.\\d+\\.\\d+)\\]"
+    },
+    "changelog": "CHANGELOG.md",
+    "code": [
+      "HouseStyle/*"
+    ]
+  }
 }
